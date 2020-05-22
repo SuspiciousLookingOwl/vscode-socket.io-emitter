@@ -1,6 +1,6 @@
-# socket.io-emitter README
+# socket-io-emitter README
 
-`socket.io-emitter` is a simple Visual Studio Code Extension that allows you to connect to a Socket.io server and emits event to the server.
+`socket-io-emitter` is a simple Visual Studio Code Extension that allows you to connect to a Socket.io server and emits event to the server.
 
 ## Event listened on Visual Studio Code
 
@@ -8,7 +8,7 @@ This extension currently listens to the following Visual Studio Code event:
 - `window.onDidChangeActiveTextEditor`
 - `workspace.onDidSaveTextDocument`
 
-Need other events? [Submit a feature request issue](https://github.com/VincentJonathan/vscode-socket.io-emitter/issues/new?assignees=&labels=&template=feature_request.md&title=%5BENHANCEMENT%5D)
+Need other events? [Submit a feature request issue](https://github.com/VincentJonathan/vscode-socket-io-emitter/issues/new?assignees=&labels=&template=feature_request.md&title=%5BENHANCEMENT%5D)
 
 ## Extension Commands
 

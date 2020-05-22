@@ -1,11 +1,12 @@
 {
-	"name": "socket.io-emitter",
+	"name": "socket-io-emitter",
 	"displayName": "Socket.IO Emitter",
 	"description": "Listen to VSCode event and emit it to your socket.io server!",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.45.0"
 	},
+	"publisher": "vincentjonathan",
 	"author": {
 		"name": "Vincent Jonathan",
 		"email": "me@vincentjonathan.com"
