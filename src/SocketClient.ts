@@ -21,6 +21,11 @@ export default class SocketClient {
     constructor() {
     	Logger.log("Socket Client created");
     	this.client = io();
+		
+    	workspace.onDidChangeConfiguration(() => {
+    		this.config = workspace.getConfiguration("socket");
+    	});
+		
     }
 
 
