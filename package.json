@@ -1,0 +1,106 @@
+{
+	"name": "socket.io-emitter",
+	"displayName": "Socket.IO Emitter",
+	"description": "Listen to VSCode event and emit it to your socket.io server!",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.45.0"
+	},
+	"author": {
+		"name": "Vincent Jonathan",
+		"email": "me@vincentjonathan.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/VincentJonathan/vscode-socket.io-emitter.git"
+	},
+	"bugs": {
+		"url": "https://github.com/VincentJonathan/vscode-socket.io-emitter/issues"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "socket.connect",
+				"title": "Connect to Socket.io server"
+			},
+			{
+				"command": "socket.disconnect",
+				"title": "Disconnect from Socket.io server"
+			},
+			{
+				"command": "socket.reconnect",
+				"title": "Reconnect to Socket.io server"
+			}
+		],
+		"configuration": [
+			{
+				"title": "Socket.io Emitter Configuration",
+				"type": "object",
+				"properties": {
+					"socket.url": {
+						"type": "string",
+						"default": "",
+						"description": "Socket.io server url with port (e.g. http://example.com:3000 )"
+					},
+					"socket.autoConnect": {
+						"type": "boolean",
+						"default": true,
+						"description": "Define whether to auto connect to Socket.io server when VSCode is started"
+					},
+					"socket.token": {
+						"type": "string",
+						"default": "",
+						"description": "(Optional) Token string value that will be sent when authenticating"
+					},
+					"socket.authenticateEvent": {
+						"type": "string",
+						"default": "authenticate",
+						"description": "Event name that will be emitted after you connected to the Socket.io server (sends token)"
+					},
+					"socket.onDidChangeActiveTextEditor": {
+						"type": "string",
+						"default": "activeFileChange",
+						"description": "Event name that will be emitted when active text editor is changed (set to empty if you don't want to emit this event)"
+					},
+					"socket.onDidSaveTextDocument": {
+						"type": "string",
+						"default": "fileSave",
+						"description": "Event name that will be emitted when a file is saved (set to empty if you don't want to emit this event)"
+					}
+				}
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint src --ext ts",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^7.0.2",
+		"@types/node": "^13.11.0",
+		"@types/socket.io-client": "^1.4.33",
+		"@types/vscode": "^1.45.0",
+		"@typescript-eslint/eslint-plugin": "^2.30.0",
+		"@typescript-eslint/parser": "^2.30.0",
+		"eslint": "^6.8.0",
+		"glob": "^7.1.6",
+		"mocha": "^7.1.2",
+		"typescript": "^3.8.3",
+		"vscode-test": "^1.3.0"
+	},
+	"dependencies": {
+		"socket.io-client": "^2.3.0"
+	}
+}

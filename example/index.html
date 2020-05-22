@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <title>VSCode Socket.io Example</title>
+</head>
+
+<body>
+
+    <div>
+        Current file :
+        <span id="fileName"></span>
+    </div>
+    <div>
+        File Size (bytes) :
+        <span id="fileSize"></span>
+    </div>
+    <div>
+        Workspace :
+        <span id="workspace"></span>
+    </div>
+    <div>
+        Line Count :
+        <span id="lineCount"></span>
+    </div>
+
+    <script>
+
+        const fileName = document.getElementById("fileName");
+        const fileSize = document.getElementById("fileSize");
+        const workspace = document.getElementById("workspace");
+        const lineCount = document.getElementById("lineCount");
+
+        let socket = io("http://localhost:3000");
+        socket.on("connect", function () {
+            socket.on("activeFileChanged", function (data) {
+                fileName.innerText = data.fileName;
+                fileSize.innerText = data.fileSize;
+                workspace.innerText = data.workspace;
+                lineCount.innerText = data.lineCount;
+            });
+        });
+    </script>
+
+</body>
+
+</html>
