@@ -8,7 +8,7 @@ This extension currently listens to the following Visual Studio Code event:
 - `window.onDidChangeActiveTextEditor`
 - `workspace.onDidSaveTextDocument`
 
-Need other events? [Submit a feature request issue](https://github.com/VincentJonathan/vscode-socket.io-emitter/issues/new)
+Need other events? [Submit a feature request issue](https://github.com/VincentJonathan/vscode-socket.io-emitter/issues/new?assignees=&labels=&template=feature_request.md&title=%5BENHANCEMENT%5D)
 
 ## Extension Commands
 
