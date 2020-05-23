@@ -57,8 +57,8 @@ io.on("connection", (socket) => {
 		
 		const index = allowedSockets.indexOf(socket.id);
 		if (index !== -1) {allowedSockets.splice(index, 1);}
-    
-		isConnected = false;
+	
+		isConnected = allowedSockets.length === 0;
 		// Emit to other connected socket that authenticated socket is disconnected
 		io.sockets.emit("disconnected");
 	});
