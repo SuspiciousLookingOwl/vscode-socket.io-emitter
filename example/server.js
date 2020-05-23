@@ -6,7 +6,7 @@ app.listen(3000);
 function handler (req, res) {}
 
 let currentFile = {};
-let allowedSocket = null;
+let allowedSockets = [];
 let isConnected = true;
 
 io.on("connection", (socket) => {
@@ -26,14 +26,14 @@ io.on("connection", (socket) => {
 			isConnected = true;
 			console.log(`${socket.id} authenticated`);
 			// Set authenticated socket
-			allowedSocket = socket.id;
+			allowedSockets.push(socket.id);
 			io.sockets.emit("connected");
 		}
 	});
 
 	socket.on("activeFileChange", (file) => {
 		// If socket isn't authenticated, dont do anything
-		if(allowedSocket !== socket.id) {return;}
+		if(!allowedSocket.includes(socket.id)) {return;}
 
 		// Set current file to the active file
 		currentFile = file;
@@ -43,7 +43,7 @@ io.on("connection", (socket) => {
 
 	socket.on("fileSave", (files) => {
 		// If socket isn't authenticated, dont do anything
-		if(allowedSocket !== socket.id) {return;}
+		if(!allowedSocket.includes(socket.id)) {return;}
 
 		// Emit saved files to other connected socket
 		io.sockets.emit("fileSaved", files);
@@ -53,7 +53,10 @@ io.on("connection", (socket) => {
 		console.log(`${socket.id} disconnected`);
 
 		// If socket isn't authenticated, dont do anything
-		if(allowedSocket !== socket.id) {return;}
+		if(!allowedSocket.includes(socket.id)) {return;}
+		
+		const index = allowedSockets.indexOf(socket.id);
+		if (index !== -1) {allowedSockets.splice(index, 1);}
     
 		isConnected = false;
 		// Emit to other connected socket that authenticated socket is disconnected
