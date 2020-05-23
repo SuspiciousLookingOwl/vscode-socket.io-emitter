@@ -68,7 +68,6 @@ export default class SocketClient {
      */
     disconnect() {
     	if(this.client && this.client.connected) {
-    		window.showInformationMessage("Disconnecting from Socket.io server");
     		Logger.log("Disconnecting from Socket.io server");
     		this.client.disconnect();
     		this.client = null;
