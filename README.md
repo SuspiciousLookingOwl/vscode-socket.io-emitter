@@ -21,6 +21,7 @@ This extension contributes the following commands:
 * `socket.connect`: Connect to Socket.io server
 * `socket.disconnect`: Disconnect from Socket.io server
 * `socket.reconnect`: Reconnect to Socket.io server
+* `socket.setToken`: Set token value (emits Authenticate event on change)
 
 ## Extension Configurations
 
