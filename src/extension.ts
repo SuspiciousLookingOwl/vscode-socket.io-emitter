@@ -6,19 +6,15 @@ let client = new SocketClient();
 
 const config = workspace.getConfiguration("socket");
 
-// Connect if autoconnect is enabled
-if(config.get<boolean>("autoConnect")){ 
-	client.connect();
-}
-
 export function activate(context: ExtensionContext) {
 
 	// Register commands
 	let connector = commands.registerCommand("socket.connect", () => {client.connect();});
 	let disconnector = commands.registerCommand("socket.disconnect", () => {client.disconnect();});
 	let reconnector = commands.registerCommand("socket.reconnect", () => {client.reconnect();});
+	let tokenSetter = commands.registerCommand("socket.setToken", () => {client.setToken();});
 
-	context.subscriptions.push(connector, disconnector, reconnector);
+	context.subscriptions.push(connector, disconnector, reconnector, tokenSetter);
 }
 
 export function deactivate() {

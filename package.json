@@ -29,15 +29,23 @@
 		"commands": [
 			{
 				"command": "socket.connect",
-				"title": "Connect to Socket.io server"
+				"title": "Connect to Socket.io server",
+				"category": "Socket.IO Emitter"
 			},
 			{
 				"command": "socket.disconnect",
-				"title": "Disconnect from Socket.io server"
+				"title": "Disconnect from Socket.io server",
+				"category": "Socket.IO Emitter"
 			},
 			{
 				"command": "socket.reconnect",
-				"title": "Reconnect to Socket.io server"
+				"title": "Reconnect to Socket.io server",
+				"category": "Socket.IO Emitter"
+			},
+			{
+				"command": "socket.setToken",
+				"title": "Set token value",
+				"category": "Socket.IO Emitter"
 			}
 		],
 		"configuration": [
@@ -55,10 +63,10 @@
 						"default": true,
 						"description": "Define whether to auto connect to Socket.io server when VSCode is started"
 					},
-					"socket.token": {
-						"type": "string",
-						"default": "",
-						"description": "(Optional) Token string value that will be sent when authenticating"
+					"socket.silent": {
+						"type": "boolean",
+						"default": true,
+						"description": "Define whether to show alert message."
 					},
 					"socket.authenticateEvent": {
 						"type": "string",
