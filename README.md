@@ -5,8 +5,12 @@
 ## Event listened on Visual Studio Code
 
 This extension currently listens to the following Visual Studio Code event:
-- `window.onDidChangeActiveTextEditor`
-- `workspace.onDidSaveTextDocument`
+
+| VSCode Event  | Emited Event | Emited data |
+| --- | --- | --- |
+| `window.onDidChangeActiveTextEditor`  | `onDidChangeActiveTextEditor`  | `{ fileName, lineCount, fileSize, workspace }` 
+| `workspace.onDidSaveTextDocument`  | `onDidSaveTextDocument`  | `{ fileName, lineCount, fileSize }` 
+
 
 Need other events? [Submit a feature request issue](https://github.com/VincentJonathan/vscode-socket.io-emitter/issues/new/choose)
 
