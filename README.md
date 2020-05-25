@@ -6,7 +6,7 @@
 
 This extension currently listens to the following Visual Studio Code event:
 
-| VSCode Event  | Emited Event | Emited data |
+| VSCode Event  | Emitted Event | Emitted data |
 | --- | --- | --- |
 | `window.onDidChangeActiveTextEditor`  | `onDidChangeActiveTextEditor`  | `{ fileName, lineCount, fileSize, workspace }` 
 | `workspace.onDidSaveTextDocument`  | `onDidSaveTextDocument`  | `{ fileName, lineCount, fileSize }` 
