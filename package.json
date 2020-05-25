@@ -2,7 +2,7 @@
 	"name": "socket-io-emitter",
 	"displayName": "Socket.IO Emitter",
 	"description": "Listen to VSCode event and emit it to your socket.io server!",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"engines": {
 		"vscode": "^1.45.0"
 	},
