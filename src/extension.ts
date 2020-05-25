@@ -1,10 +1,8 @@
-import {commands, ExtensionContext, workspace} from "vscode";
+import {commands, ExtensionContext} from "vscode";
 import Logger from "./Logger";
 import Client from "./Client";
 
 let client = new Client();
-
-const config = workspace.getConfiguration("socket");
 
 export function activate(context: ExtensionContext) {
 
