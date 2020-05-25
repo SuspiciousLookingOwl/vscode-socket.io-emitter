@@ -12,9 +12,9 @@ interface EmittedTextDocument {
 }
 
 
-export default class SocketClient {
+export default class Client {
 
-    client: SocketIOClient.Socket | null;
+    socketClient: SocketIOClient.Socket | null;
 	config = workspace.getConfiguration("socket");
 	token = "";
 	disposable: Disposable[] = [];
@@ -23,7 +23,7 @@ export default class SocketClient {
 	constructor() {
 		Logger.log("Socket Client created");
 
-		this.client = null;
+		this.socketClient = null;
 		
     	workspace.onDidChangeConfiguration(() => {
     		this.config = workspace.getConfiguration("socket");
@@ -42,25 +42,25 @@ export default class SocketClient {
      * Connect to Socket.io server
      */
 	connect() {
-    	if(this.client && this.client.connected) {
+    	if(this.socketClient && this.socketClient.connected) {
     		Logger.log("Already connected to Socket.io server");
     		return;
 		}
 		
     	Logger.log(`Connecting to Socket.io server - ${this.config.get<string>("url")!}`);
-		this.client = io(this.config.get<string>("url")!);
+		this.socketClient = io(this.config.get<string>("url")!);
 		
-		this.client.on("connect", () => {
+		this.socketClient.on("connect", () => {
     		Logger.alert(`Connected to Socket.io server - ${this.config.get<string>("url")!}`);
 			Logger.log(`Connected to Socket.io server - ${this.config.get<string>("url")!}`);
 			this.emitAuthenticate();
 			this.emitChangeActiveTextEditor();
 		});
-    	this.client.on("reconnect", () => {
+    	this.socketClient.on("reconnect", () => {
     		Logger.alert(`Reconnecting to ${this.config.get<string>("url")!}`);
     	    Logger.log(`Reconnecting to ${this.config.get<string>("url")!}`);
     	});
-    	this.client.on("disconnect", () => {
+    	this.socketClient.on("disconnect", () => {
     		Logger.alert(`Disconnected from ${this.config.get<string>("url")!}`);
     	    Logger.log(`Disconnected from ${this.config.get<string>("url")!}`);
     	});
@@ -72,10 +72,10 @@ export default class SocketClient {
      * Disconnect from Socket.io server
      */
 	disconnect() {
-    	if(this.client && this.client.connected) {
+    	if(this.socketClient && this.socketClient.connected) {
 			Logger.log("Disconnecting from Socket.io server");
-			this.client.removeAllListeners();
-    		this.client.disconnect();
+			this.socketClient.removeAllListeners();
+    		this.socketClient.disconnect();
     	} else {
     		Logger.log("You are not connected to a Socket.io server");
     	}
@@ -109,13 +109,13 @@ export default class SocketClient {
 	 * Emit authenticate event to Socket.IO server
 	 */
 	emitAuthenticate() {
-		if(!this.client || !this.client.connected) {return;}
+		if(!this.socketClient || !this.socketClient.connected) {return;}
 		
 		const eventName = this.config.get<string>("authenticateEvent")!;
 		if(!eventName) {return;}
 		
     	Logger.log(`Emitting ${eventName}`);
-		this.client!.emit(eventName, {token: this.token});
+		this.socketClient!.emit(eventName, {token: this.token});
 	}
  
 
@@ -123,7 +123,7 @@ export default class SocketClient {
      * Handler for window.onDidChangeActiveTextEditor event
      */
 	async emitChangeActiveTextEditor() {
-    	if(!this.client || !this.client.connected) {return;}
+    	if(!this.socketClient || !this.socketClient.connected) {return;}
         
     	const eventName = this.config.get<string>("onDidChangeActiveTextEditor")!;
     	if(!eventName) {return;}
@@ -146,7 +146,7 @@ export default class SocketClient {
     	}
         
     	Logger.log(`Emitting ${eventName}`);
-    	this.client.emit(eventName, data);
+    	this.socketClient.emit(eventName, data);
 	}
 
 
@@ -154,7 +154,7 @@ export default class SocketClient {
      * Handler for workspace.onDidSaveTextDocument event
      */
 	async emitSaveTextDocument(savedFile: TextDocument ) {
-    	if(!this.client || !this.client.connected) {return;}
+    	if(!this.socketClient || !this.socketClient.connected) {return;}
         
     	const eventName = this.config.get<string>("onDidSaveTextDocument")!;
     	if(!eventName) {return;}
@@ -178,7 +178,7 @@ export default class SocketClient {
     	}
         
     	Logger.log(`Emitting ${eventName}`);
-    	this.client.emit(this.config.get<string>("onDidSaveTextDocument")!, data);
+    	this.socketClient.emit(this.config.get<string>("onDidSaveTextDocument")!, data);
 	};
 
 }

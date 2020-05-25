@@ -1,8 +1,8 @@
 import {commands, ExtensionContext, workspace} from "vscode";
 import Logger from "./Logger";
-import SocketClient from "./SocketClient";
+import Client from "./Client";
 
-let client = new SocketClient();
+let client = new Client();
 
 const config = workspace.getConfiguration("socket");
 
