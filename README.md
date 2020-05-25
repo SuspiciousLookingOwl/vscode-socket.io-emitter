@@ -28,7 +28,6 @@ This extension contributes the following commands:
 This extension contributes the following configurations:
 * `socket.url`: Socket.io server url with port (e.g. http://example.com:3000 )
 * `socket.autoConnect`: Define whether to auto connect to Socket.io server when VSCode is started
-* `socket.token`: (Optional) Token string value that will be sent when authenticating
 * `socket.authenticateEvent`: Event name that will be emitted after you connected to the Socket.io server (sends token)
 * `socket.onDidChangeActiveTextEditor`: Event name that will be emitted when active text editor is changed (set to empty if you don't want to emit this event)
 * `socket.onDidSaveTextDocument`: Event name that will be emitted when a file is saved (set to empty if you don't want to emit this event)
