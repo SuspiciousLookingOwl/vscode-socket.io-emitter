@@ -10,7 +10,7 @@ export function activate(context: ExtensionContext) {
 	let connector = commands.registerCommand("socket.connect", () => {client.connect();});
 	let disconnector = commands.registerCommand("socket.disconnect", () => {client.disconnect();});
 	let reconnector = commands.registerCommand("socket.reconnect", () => {client.reconnect();});
-	let tokenSetter = commands.registerCommand("socket.setToken", () => {client.setToken();});
+	let tokenSetter = commands.registerCommand("socket.setToken", () => {client.promptTokenInput();});
 
 	context.subscriptions.push(connector, disconnector, reconnector, tokenSetter);
 }

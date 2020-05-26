@@ -2,7 +2,10 @@ import {window, workspace, TextDocument, Disposable} from "vscode";
 import Logger from "./Logger";
 import {basename} from "path";
 import * as io from "socket.io-client";
+import * as fs from "fs";
+import * as path from "path";
 
+const HOME_DIR = require("os").homedir();
 
 interface EmittedTextDocument {
     fileName: string,
@@ -16,12 +19,11 @@ export default class Client {
 
     socketClient: SocketIOClient.Socket | null;
 	config = workspace.getConfiguration("socket");
-	token = "";
 	disposable: Disposable[] = [];
 
 
 	constructor() {
-		Logger.log("Socket Client created");
+		Logger.log("Client created");
 
 		this.socketClient = null;
 		
@@ -91,20 +93,33 @@ export default class Client {
 	}
 	
 	/**
-	 * Prompt input box for token
+	 * Prompt input box for token`
 	 */
-	async setToken() {
+	async promptTokenInput() {
 		let token = await window.showInputBox({
 			placeHolder: "Token",
 			password: true,
 			prompt: "Enter your token (Emits authenticate event)"
 		});
 		if (token !== undefined) {
-			this.token = token;
+			this.setToken(token);
 			this.emitAuthenticate();
 		}
 	}
-	
+
+	setToken(token: string) {
+		fs.writeFileSync(path.join(HOME_DIR, ".socket.io.emitter.json"), JSON.stringify({token}));
+	}
+
+	getToken(): string {
+		try {
+			let config = JSON.parse(fs.readFileSync(path.join(HOME_DIR, ".socket.io.emitter.json"), "utf-8"));
+			return config.token || "";
+		} catch(err) {
+			return "";
+		}
+	}
+ 	
 	/**
 	 * Emit authenticate event to Socket.IO server
 	 */
@@ -115,7 +130,7 @@ export default class Client {
 		if(!eventName) {return;}
 		
     	Logger.log(`Emitting ${eventName}`);
-		this.socketClient!.emit(eventName, {token: this.token});
+		this.socketClient!.emit(eventName, {token: this.getToken()});
 	}
  
 
