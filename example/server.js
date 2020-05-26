@@ -60,6 +60,8 @@ io.on("connection", (socket) => {
     
 		isConnected = allowedSockets.length > 0;
 		// Emit to other connected socket that authenticated socket is disconnected
-		io.sockets.emit("disconnected");
+		if (!isConnected) {
+			io.sockets.emit("disconnected");
+		}
 	});
 });
