@@ -148,7 +148,7 @@ export default class Client {
     	if (window.activeTextEditor) {
     		let size = 0;
     		try {
-    			size = await (await workspace.fs.stat(window.activeTextEditor.document.uri)).size;
+    			size = (await workspace.fs.stat(window.activeTextEditor.document.uri)).size;
     		} catch (err){
     			return; // Not a file
     		}
@@ -181,7 +181,7 @@ export default class Client {
     	if (window.activeTextEditor) {
     		let size = 0;
     		try {
-    			size = await (await workspace.fs.stat(savedFile.uri)).size;
+    			size = (await workspace.fs.stat(savedFile.uri)).size;
     		} catch (err){
     			return; // Not a file
     		}
