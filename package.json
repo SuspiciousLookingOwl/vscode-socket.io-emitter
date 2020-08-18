@@ -13,10 +13,10 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/VincentJonathan/vscode-socket.io-emitter.git"
+		"url": "https://github.com/SuspiciousLookingOwl/vscode-socket.io-emitter.git"
 	},
 	"bugs": {
-		"url": "https://github.com/VincentJonathan/vscode-socket.io-emitter/issues"
+		"url": "https://github.com/SuspiciousLookingOwl/vscode-socket.io-emitter/issues"
 	},
 	"categories": [
 		"Other"
