@@ -8,12 +8,16 @@ export default class Logger {
 	}
 
 	public static log(message: string) {
-		if (!this._output) {this._setup();}
+		if (!this._output) {
+			this._setup();
+		}
 		this._output.appendLine(message);
 	}
 
 	public static alert(message: string) {
-		if (workspace.getConfiguration("socket").get<boolean>("silent")!) {return;}
+		if (workspace.getConfiguration("socket").get<boolean>("silent")!) {
+			return;
+		}
 		window.showInformationMessage(message);
 	}
 }
